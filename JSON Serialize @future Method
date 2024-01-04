@@ -1,0 +1,36 @@
+🆃🆁🅸🅶🅶🅴🆁
+
+trigger JsonPracticeTrigger on Account (after insert) {
+    
+    String newAccout = Json.serialize(Trigger.new);  
+		JsonPractice.createRecord(newAccout);
+}
+
+
+𝘾𝙇𝘼𝙎𝙎:
+
+public class JsonPractice {
+    
+    @future
+    public static void createRecord (string jsonAccount){
+         
+        list<account> acclist = (list<account>)json.deserialize(jsonAccount, list<account>.class);
+        
+        contact con;
+        list<contact> conList = new list<contact>();
+        for(Account a: accList){
+            
+           con = new contact(LastName = a.Name + ' - JSON Serialization &                   
+           Deserialization Tested', 
+
+           Description = 'Salesforce Dragon', AccountId = a.Id);
+           con.phone = '123456789'; con.MobilePhone = '123456789';
+           con.City_Address__c = ' Hawklogix - LLC';
+           conList.add(con);
+        }
+    
+        insert conList;
+    }
+    
+
+}
